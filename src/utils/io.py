@@ -17,8 +17,10 @@ def load_image_rgb(image_path: str):
 
 
 def load_video(video_info, n_frames=-1):
-    reader = imageio.get_reader(video_info, "ffmpeg")
-
+    if video_info.lower().endswith(".gif"):
+        reader = imageio.get_reader(video_info)
+    else:
+        reader = imageio.get_reader(video_info, "ffmpeg")
     ret = []
     for idx, frame_rgb in enumerate(reader):
         if n_frames > 0 and idx >= n_frames:

@@ -50,7 +50,7 @@ def is_image(file_path):
 
 
 def is_video(file_path):
-    if file_path.lower().endswith((".mp4", ".mov", ".avi", ".webm")) or osp.isdir(file_path):
+    if file_path.lower().endswith((".mp4", ".mov", ".avi", ".webm", ".gif")) or osp.isdir(file_path):
         return True
     return False
 
@@ -163,3 +163,4 @@ def is_square_video(video_path):
         # gr.Info(f"Uploaded video is not square, force do crop (driving) to be True")
 
     return width == height
+

@@ -6,12 +6,8 @@ __pycache__/
 *$py.class
 
 # Model weights
-**/*.pth
-**/*.onnx
-
-pretrained_weights/*.md
-pretrained_weights/docs
-pretrained_weights/liveportrait
+#**/*.pth
+#**/*.onnx
 
 # Ipython notebook
 *.ipynb
@@ -19,11 +15,4 @@ pretrained_weights/liveportrait
 # Temporary files or benchmark resources
 animations/*
 tmp/*
-.vscode/launch.json
-**/*.DS_Store
-gradio_temp/**
-
-# Windows dependencies
-ffmpeg/
-LivePortrait_env/
-*.bat
+gradio_cached_examples/
