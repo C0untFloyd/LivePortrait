@@ -187,8 +187,6 @@ def is_square_video(video_path):
 
     return width == height
 
-<<<<<<< HEAD
-=======
 def clean_state_dict(state_dict):
     new_state_dict = OrderedDict()
     for k, v in state_dict.items():
@@ -196,4 +194,3 @@ def clean_state_dict(state_dict):
             k = k[7:]  # remove `module.`
         new_state_dict[k] = v
     return new_state_dict
->>>>>>> upstream/main
