@@ -112,9 +112,15 @@ class GradioPipeline(LivePortraitPipeline):
             raise gr.Error("Please upload the source portrait or source video, and driving video 🤗🤗🤗", duration=5)
 
     @torch.no_grad()
-    def execute_image_retargeting(self, input_eye_ratio: float, input_lip_ratio: float, input_head_pitch_variation: float, input_head_yaw_variation: float, input_head_roll_variation: float, input_image, retargeting_source_scale: float, flag_do_crop_input_retargeting_image=True):
+    def execute_image_retargeting(self, input_eye_ratio: float, input_lip_ratio: float, input_head_pitch_variation: float, input_head_yaw_variation: float, input_head_roll_variation: float, input_image, target_image, retargeting_source_scale: float, flag_do_crop_input_retargeting_image=True):
         """ for single image retargeting
         """
+
+        if target_image is not None:
+            self.prepare_retargeting_image(input_image, input_head_pitch_variation, input_head_yaw_variation, input_head_roll_variation, retargeting_source_scale, flag_do_crop=flag_do_crop_input_retargeting_image)
+            return
+
+
         if input_head_pitch_variation is None or input_head_yaw_variation is None or input_head_roll_variation is None:
             raise gr.Error("Invalid relative pose input 💥!", duration=5)
         # disposable feature

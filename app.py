@@ -99,6 +99,7 @@ head_yaw_slider = gr.Slider(minimum=-25, maximum=25, value=0, step=1, label="rel
 head_roll_slider = gr.Slider(minimum=-15.0, maximum=15.0, value=0, step=1, label="relative roll")
 retargeting_input_image = gr.Image(type="filepath")
 retargeting_input_video = gr.Video()
+retargeting_input_target_image = gr.Image(type="filepath")
 output_image = gr.Image(type="numpy")
 output_image_paste_back = gr.Image(type="numpy")
 output_video = gr.Video(autoplay=False)
@@ -249,14 +250,17 @@ with gr.Blocks(theme=gr.themes.Soft(font=[gr.themes.GoogleFont("Plus Jakarta San
     # Retargeting Image
     gr.Markdown(load_description("assets/gradio/gradio_description_retargeting.md"), visible=True)
     with gr.Row(visible=True):
-        flag_do_crop_input_retargeting_image = gr.Checkbox(value=True, label="do crop (source)")
-        retargeting_source_scale.render()
-        eye_retargeting_slider.render()
-        lip_retargeting_slider.render()
-    with gr.Row(visible=True):
-        head_pitch_slider.render()
-        head_yaw_slider.render()
-        head_roll_slider.render()
+        with gr.Column():
+            flag_do_crop_input_retargeting_image = gr.Checkbox(value=True, label="do crop (source)")
+            retargeting_source_scale.render()
+            eye_retargeting_slider.render()
+            lip_retargeting_slider.render()
+            head_pitch_slider.render()
+            head_yaw_slider.render()
+            head_roll_slider.render()
+        with gr.Column():
+            with gr.Accordion(open=True, label="Retargeting Image Target"):
+                retargeting_input_target_image.render()
     with gr.Row(visible=True):
         process_button_retargeting = gr.Button("🚗 Retargeting Image", variant="primary")
     with gr.Row(visible=True):
@@ -376,7 +380,7 @@ with gr.Blocks(theme=gr.themes.Soft(font=[gr.themes.GoogleFont("Plus Jakarta San
     process_button_retargeting.click(
         # fn=gradio_pipeline.execute_image,
         fn=gpu_wrapped_execute_image_retargeting,
-        inputs=[eye_retargeting_slider, lip_retargeting_slider, head_pitch_slider, head_yaw_slider, head_roll_slider, retargeting_input_image, retargeting_source_scale, flag_do_crop_input_retargeting_image],
+        inputs=[eye_retargeting_slider, lip_retargeting_slider, head_pitch_slider, head_yaw_slider, head_roll_slider, retargeting_input_image, retargeting_input_target_image, retargeting_source_scale, flag_do_crop_input_retargeting_image],
         outputs=[output_image, output_image_paste_back],
         show_progress=True
     )
