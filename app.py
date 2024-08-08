@@ -316,6 +316,7 @@ with gr.Blocks(theme=gr.themes.Soft(font=[gr.themes.GoogleFont("Plus Jakarta San
         with gr.Column():
             with gr.Accordion(open=True, label="Retargeting Image Input"):
                 retargeting_input_image.render()
+                retargeting_input_target_image.render()
                 gr.Examples(
                     examples=[
                         [osp.join(example_portrait_dir, "s9.jpg")],
