@@ -119,7 +119,6 @@ eyeball_direction_x = gr.Slider(minimum=-30.0, maximum=30.0, value=0, step=0.01,
 eyeball_direction_y = gr.Slider(minimum=-63.0, maximum=63.0, value=0, step=0.01, label="eye gaze (vertical) 🙄")
 retargeting_input_image = gr.Image(type="filepath")
 retargeting_input_video = gr.Video()
-retargeting_input_target_image = gr.Image(type="filepath")
 output_image = gr.Image(type="numpy")
 output_image_paste_back = gr.Image(type="numpy")
 retargeting_output_image = gr.Image(type="numpy")
@@ -353,7 +352,6 @@ with gr.Blocks(theme=gr.themes.Soft(font=[gr.themes.GoogleFont("Plus Jakarta San
         with gr.Column():
             with gr.Accordion(open=True, label="Retargeting Image Input"):
                 retargeting_input_image.render()
-                retargeting_input_target_image.render()
                 gr.Examples(
                     examples=[
                         [osp.join(example_portrait_dir, "s9.jpg")],
@@ -474,7 +472,7 @@ with gr.Blocks(theme=gr.themes.Soft(font=[gr.themes.GoogleFont("Plus Jakarta San
             inputs=[
                 eye_retargeting_slider, lip_retargeting_slider, head_pitch_slider, head_yaw_slider, head_roll_slider, mov_x, mov_y, mov_z,
                 lip_variation_zero, lip_variation_one, lip_variation_two, lip_variation_three, smile, wink, eyebrow, eyeball_direction_x, eyeball_direction_y,
-                retargeting_input_image, retargeting_input_target_image, retargeting_source_scale, flag_stitching_retargeting_input, flag_do_crop_input_retargeting_image
+                retargeting_input_image, retargeting_source_scale, flag_stitching_retargeting_input, flag_do_crop_input_retargeting_image
             ],
             outputs=[retargeting_output_image, retargeting_output_image_paste_back],
         )
